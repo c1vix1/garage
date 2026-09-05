@@ -17,10 +17,10 @@ MQTT_USER = os.getenv("MQTT_USER", None)
 MQTT_PASS = os.getenv("MQTT_PASS", None)
 
 CROPS = {
-    "garage_1": (0, 720, 0, 450),
-    "garage_2": (0, 720, 450, 900),
-    "car_1":    (150, 720, 100, 600),
-    "car_2":    (150, 720, 600, 1100)
+    "garage_1": (443, 877, 621, 1086),      # Left Garage Door
+    "garage_2": (460, 874, 1192, 1650),    # Right Garage Door
+    "car_1":    (908, 1276, 568, 1113),   # Parking Spot 1
+    "car_2":    (929, 1296, 1681, 2304)   # Parking Spot 2
 }
 
 ENTITIES = {
@@ -59,7 +59,11 @@ for name, config in ENTITIES.items():
     print(f"    Loaded model: {name}")
 
 # --- MQTT SETUP ---
-mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1)
+mqtt_client = mqtt.Client(
+    callback_api_version=mqtt.CallbackAPIVersion.VERSION2,
+    protocol=mqtt.MQTTv5
+)
+
 if MQTT_USER and MQTT_PASS:
     mqtt_client.username_pw_set(MQTT_USER, MQTT_PASS)
 
