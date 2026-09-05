@@ -18,12 +18,11 @@ MQTT_PASS = os.getenv("MQTT_PASS", None)
 
 # Region of Interest (ROI) crop coordinates: (y1, y2, x1, x2)
 CROPS = {
-    "garage_1": (0, 720, 0, 450),
-    "garage_2": (0, 720, 450, 900),
-    "car_1":    (150, 720, 100, 600),
-    "car_2":    (150, 720, 600, 1100)
+    "garage_1": (443, 877, 621, 1086),      # Left Garage Door
+    "garage_2": (460, 874, 1192, 1650),    # Right Garage Door
+    "car_1":    (908, 1276, 568, 1113),   # Parking Spot 1
+    "car_2":    (929, 1296, 1681, 2304)   # Parking Spot 2
 }
-
 # Entities setup: model file location, binary class names, and MQTT state topic
 ENTITIES = {
     "garage_1": {
