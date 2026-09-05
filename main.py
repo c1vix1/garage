@@ -4,6 +4,7 @@ import onnxruntime as ort
 import paho.mqtt.client as mqtt
 import os
 import sys
+import json
 from flask import Flask, jsonify
 
 # --- ENVIRONMENT & CONFIGURATION ---
@@ -72,8 +73,37 @@ def connect_mqtt():
     except Exception as e:
         print(f"[!] MQTT Connection error: {e}")
 
-connect_mqtt()
+def publish_discovery():
+    """Publishes Home Assistant MQTT Auto-Discovery configuration payloads."""
+    for name, config in ENTITIES.items():
+        is_garage = "garage" in name
+        
+        # Unique ID and discovery topic
+        unique_id = f"garage_vision_{name}"
+        discovery_topic = f"homeassistant/binary_sensor/garage_vision_{name}/config"
+        
+        payload = {
+            "name": f"Garage Vision {name.replace('_', ' ').title()}",
+            "unique_id": unique_id,
+            "state_topic": config["topic"],
+            "payload_on": "open" if is_garage else "present",
+            "payload_off": "closed" if is_garage else "absent",
+            "device_class": "garage_door" if is_garage else "occupancy",
+            "device": {
+                "identifiers": ["garage_vision_ai_system"],
+                "name": "Garage Vision AI System",
+                "model": "MobileNetV2 ONNX",
+                "manufacturer": "civiltech"
+            }
+        }
+        
+        # Publish discovery config as retained message
+        mqtt_client.publish(discovery_topic, json.dumps(payload), retain=True)
+        print(f"[*] Published HA Auto-Discovery config for: {name}")
 
+# --- Call after connect_mqtt() ---
+connect_mqtt()
+publish_discovery()
 # --- PREPROCESSING & INFERENCE ---
 def preprocess(crop_img):
     """Resizes and normalizes the cropped region to match PyTorch MobileNetV2 defaults."""
