@@ -1,0 +1,5 @@
+opencv-python-headless
+onnxruntime
+paho-mqtt
+numpy
+flask

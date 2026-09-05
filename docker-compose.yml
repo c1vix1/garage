@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  garage-vision:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: garage_vision_ai
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - RTSP_URL=${RTSP_URL}
+      - MQTT_BROKER=${MQTT_BROKER}
+      - MQTT_PORT=${MQTT_PORT}
+      - MQTT_USER=${MQTT_USER}
+      - MQTT_PASS=${MQTT_PASS}
