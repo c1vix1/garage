@@ -60,7 +60,7 @@ for name, config in ENTITIES.items():
     print(f"    Loaded model: {name} ({model_path})")
 
 # --- INITIALIZE MQTT CLIENT ---
-mqtt_client = mqtt.Client()
+mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1)
 if MQTT_USER and MQTT_PASS:
     mqtt_client.username_pw_set(MQTT_USER, MQTT_PASS)
 
