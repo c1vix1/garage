@@ -21,26 +21,27 @@ CROPS = {
     "car_2":    (929, 1296, 1681, 2304)   # Parking Spot 2
 }
 
+# REMINDER: THE IS WHERE IT FLIP FLOPS 2 -> 1, and 1 -> 2
 ENTITIES = {
     "garage_1": {
         "model_path": "models/garage_1_model.onnx",
         "labels": ["closed", "open"],
-        "topic": "homeassistant/sensor/garage_door_1/state"
+        "topic": "homeassistant/sensor/garage_door_2/state"
     },
     "garage_2": {
         "model_path": "models/garage_2_model.onnx",
         "labels": ["closed", "open"],
-        "topic": "homeassistant/sensor/garage_door_2/state"
+        "topic": "homeassistant/sensor/garage_door_1/state"
     },
     "car_1": {
         "model_path": "models/car_1_model.onnx",
         "labels": ["absent", "present"],
-        "topic": "homeassistant/sensor/parking_spot_1/state"
+        "topic": "homeassistant/sensor/parking_spot_2/state"
     },
     "car_2": {
         "model_path": "models/car_2_model.onnx",
         "labels": ["absent", "present"],
-        "topic": "homeassistant/sensor/parking_spot_2/state"
+        "topic": "homeassistant/sensor/parking_spot_1/state"
     }
 }
 
