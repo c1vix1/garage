@@ -113,7 +113,7 @@ def process_frame():
         results[name] = state_label
         print(f"[TRIGGERED INFERENCE] {name} -> {state_label}")
 
-    return {"status": "success", "results": results}
+    return {"status": "success", "results": results, "note": "1 -> 2, 2 -> 1"}
 
 # --- FLASK SERVER ---
 app = Flask(__name__)
