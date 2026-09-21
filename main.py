@@ -3,7 +3,7 @@ import time
 import cv2
 import numpy as np
 import paho.mqtt.client as mqtt
-from openvino.runtime import Core
+from openvino import Core
 
 # --- Configuration from Environment Variables ---
 # Stream for Car 1 physical camera (now running the model for Car 2)
