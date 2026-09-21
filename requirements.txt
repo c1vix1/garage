@@ -3,3 +3,4 @@ onnxruntime
 paho-mqtt
 numpy
 flask
+openvino
